@@ -1,0 +1,24 @@
+---
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install  python3, pip3 and java open-jdk for Ubuntu
+    apt:
+      name:
+          - python3
+          - python3-pip
+          - openjdk-8-jdk
+      state: latest
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+  - name: install  python3, pip3 and java open-jdk for CentOS
+    dnf:
+      name:
+          - python3
+          - python3-pip
+          - java-1.8.0-openjdk
+      state: latest
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
